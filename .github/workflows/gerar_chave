@@ -1,0 +1,16 @@
+name: Gerar Keystore
+on: workflow_dispatch # Permite rodar manualmente
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Gerar arquivo JKS
+        run: |
+          keytool -genkeypair -v -keystore oficina.keystore -alias oficina-alias -keyalg RSA -keysize 2048 -validity 10000 -storepass sua_senha_aqui -keypass sua_senha_aqui -dname "CN=Oficina, OU=Dev, O=Oficina, L=Cidade, S=Estado, C=BR"
+      
+      - name: Converter para Base64 (Para o Secret)
+        run: |
+          echo "COPIE O CODIGO ABAIXO E SALVE NO SEU REPOSITORY SECRET 'KEYSTORE_BASE64':"
+          base64 -w 0 oficina.keystore
+          echo ""
