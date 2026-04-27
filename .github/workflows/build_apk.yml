@@ -24,8 +24,7 @@ jobs:
           pip install "flet[all]" Pillow
 
       - name: Build APK
-        # O segredo está nesta linha abaixo: usamos o pip para incluir pacotes
-        run: flet build apk --pip-install Pillow
+        run: flet build apk
         
       - name: Upload APK
         uses: actions/upload-artifact@v4
